@@ -1,40 +1,54 @@
-package com.renan.bartendersmart.enitites;
+package com.renan.bartendersmart.entities;
 
 import java.io.Serializable;
 
-public class OrderItem implements Serializable {
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.renan.bartendersmart.entities.pk.ItemPedidoPK;
+
+@Entity
+@Table(name = "tb_itemPedido")
+public class ItemPedido implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	@EmbeddedId
+	private ItemPedidoPK id = new ItemPedidoPK();
 	
 	private Integer quantity;
 	private Double price;
+	
+	public ItemPedido() {
 		
-	public OrderItem() {
 	}
 
-	public OrderItem(Order order, Product product, Integer quantity, Double price) {
+	public ItemPedido(Pedido pedido, Produto produto,Integer quantity, Double price) {
 		super();
-		id.setOrder(order);
-		id.setProduct(product);
+		id.setPedido(pedido);
+		id.setProduto(produto);
 		this.quantity = quantity;
 		this.price = price;
 	}
 	
-	public Order getOrder() {
-		return id.getOrder();
+	@JsonIgnore
+	public Pedido getPedido() {
+		return id.getPedido();
 	}
 	
-	public void setOrder(Order order) {
-		id.setOrder(order);
+	public void setPedido(Pedido pedido) {
+		id.setPedido(pedido);
 	}
 	
-	public Product getProduct() {
-		return id.getProduct();
+	public Produto getProduto() {
+		return id.getProduto();
 	}
 	
-	public void setProduct(Product product) {
-		id.setProduct(product);
+	public void setProduto(Produto produto) {
+		id.setProduto(produto);
 	}	
-	
+
 	public Integer getQuantity() {
 		return quantity;
 	}
@@ -51,8 +65,8 @@ public class OrderItem implements Serializable {
 		this.price = price;
 	}
 	
-	public Double getSubTotal() {
-		return this.price * this.quantity;
+	public Double getSubTotal(){
+		return price * quantity;
 	}
 
 	@Override
@@ -71,7 +85,7 @@ public class OrderItem implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		OrderItem other = (OrderItem) obj;
+		ItemPedido other = (ItemPedido) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -79,5 +93,4 @@ public class OrderItem implements Serializable {
 			return false;
 		return true;
 	}
-	
 }

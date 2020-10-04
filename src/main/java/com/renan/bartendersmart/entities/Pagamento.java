@@ -1,24 +1,42 @@
-package com.renan.bartendersmart.enitites;
+package com.renan.bartendersmart.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-public class Payment implements Serializable {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+@Table(name = "tb_pagamento")
+public class Pagamento implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	private Long id;
-	private Instant moment;	
-	private Order order;
 	
-	public Payment() {		
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private Instant moment;
+	
+	@JsonIgnore
+	@OneToOne
+	@MapsId
+	private Pedido pedido;
+	
+	public Pagamento() {
+		
 	}
 
-	public Payment(Long id, Instant moment, Order order) {
+	public Pagamento(Long id, Instant moment, Pedido pedido) {
 		super();
 		this.id = id;
 		this.moment = moment;
-		this.order = order;
+		this.pedido = pedido;
 	}
 
 	public Long getId() {
@@ -37,12 +55,12 @@ public class Payment implements Serializable {
 		this.moment = moment;
 	}
 
-	public Order getOrder() {
-		return order;
+	public Pedido getPedido() {
+		return pedido;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 
 	@Override
@@ -61,7 +79,7 @@ public class Payment implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Payment other = (Payment) obj;
+		Pagamento other = (Pagamento) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -69,9 +87,4 @@ public class Payment implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-
 }

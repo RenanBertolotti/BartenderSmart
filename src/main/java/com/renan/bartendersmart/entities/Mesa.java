@@ -1,18 +1,38 @@
-package com.renan.bartendersmart.enitites;
+package com.renan.bartendersmart.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Table implements Serializable {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+@Entity
+@Table(name = "tb_mesa")
+public class Mesa implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "mesa")
+	private List<Pedido> pedidos = new ArrayList<>();
 	
-	public Table() {
+	public Mesa() {
+
 	}
 
-	public Table(Long id, String name) {
+	public Mesa(Long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -32,7 +52,11 @@ public class Table implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
+	}		
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}	
 
 	@Override
 	public int hashCode() {
@@ -50,7 +74,7 @@ public class Table implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Table other = (Table) obj;
+		Mesa other = (Mesa) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -58,5 +82,5 @@ public class Table implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }
