@@ -15,32 +15,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.renan.bartendersmart.entities.Mesa;
-import com.renan.bartendersmart.services.MesaService;
+import com.renan.bartendersmart.entities.Produto;
+import com.renan.bartendersmart.services.ProdutoService;
 
 @RestController
-@RequestMapping(value = "/mesas")
-public class MesaResource {
+@RequestMapping(value = "/produtos")
+public class ProdutoResource {
 	
 	@Autowired
-	private MesaService service;
+	private ProdutoService service;
 
 	@GetMapping
-	public ResponseEntity<List<Mesa>> findAll(){		
-		List<Mesa> list = service.findAll();
+	public ResponseEntity<List<Produto>> findAll(){		
+		List<Produto> list = service.findAll();
 		
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Mesa> findById(@PathVariable Long id){
-		Mesa obj = service.findById(id);
+	public ResponseEntity<Produto> findById(@PathVariable Long id){
+		Produto obj = service.findById(id);
 		
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Mesa> insert(@RequestBody Mesa obj){
+	public ResponseEntity<Produto> insert(@RequestBody Produto obj){
 		obj = service.insert(obj);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -56,7 +56,7 @@ public class MesaResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Mesa> update(@PathVariable Long id, @RequestBody Mesa obj){
+	public ResponseEntity<Produto> update(@PathVariable Long id, @RequestBody Produto obj){
 		obj = service.update(id, obj);
 		
 		return ResponseEntity.ok().body(obj);		
