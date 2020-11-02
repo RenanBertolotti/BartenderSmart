@@ -1,64 +1,70 @@
-package com.renan.bartendersmart.resources;
+package com.renan.bartendersmart.services;
 
-import java.net.URI;
 import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.renan.bartendersmart.entities.Produto;
-import com.renan.bartendersmart.services.ProdutoService;
+import com.renan.bartendersmart.repositories.ProdutoRepository;
+import com.renan.bartendersmart.services.exception.DatabaseException;
+import com.renan.bartendersmart.services.exception.ResourceNotFoundException;
 
-@RestController
-@RequestMapping(value = "/produtos")
-public class ProdutoResource {
+@Service
+public class ProdutoService {
 	
 	@Autowired
-	private ProdutoService service;
-
+	private ProdutoRepository repository;
+	
 	@GetMapping
-	public ResponseEntity<List<Produto>> findAll(){		
-		List<Produto> list = service.findAll();
-		
-		return ResponseEntity.ok().body(list);
+	public List<Produto> findAll(){
+		return repository.findAll();
 	}
 	
-	@GetMapping(value = "/{id}")
-	public ResponseEntity<Produto> findById(@PathVariable Long id){
-		Produto obj = service.findById(id);
+	@GetMapping
+	public Produto findById(Long id) {
+		Optional<Produto> obj = repository.findById(id);
 		
-		return ResponseEntity.ok().body(obj);
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
-	@PostMapping
-	public ResponseEntity<Produto> insert(@RequestBody Produto obj){
-		obj = service.insert(obj);
-		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		
-		return ResponseEntity.created(uri).body(obj);
+	public Produto insert(Produto obj) {
+		return repository.save(obj);
 	}
 	
-	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id){
-		service.delete(id);
-		
-		return ResponseEntity.noContent().build();
+	public void delete(Long id) {
+		try {
+			repository.deleteById(id);
+		}catch(EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException(id);
+		}catch(DataIntegrityViolationException e) {
+			throw new DatabaseException(e.getMessage());
+		}
+			
 	}
 	
-	@PutMapping(value = "/{id}")
-	public ResponseEntity<Produto> update(@PathVariable Long id, @RequestBody Produto obj){
-		obj = service.update(id, obj);
-		
-		return ResponseEntity.ok().body(obj);		
+	private void updateData(Produto entidade, Produto produto) {
+		entidade.setName(produto.getName());
+		entidade.setDescricao(produto.getDescricao());
+		entidade.setPrice(produto.getPrice());
+	}
+	
+	public Produto update(Long id, Produto produto) {
+		try {
+			Produto entidade = repository.getOne(id);
+			
+			updateData(entidade, produto);
+			
+			return repository.save(entidade);
+		}catch(EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
+
 	}
 }
