@@ -15,32 +15,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.renan.bartendersmart.entities.Produto;
-import com.renan.bartendersmart.services.ProdutoService;
+import com.renan.bartendersmart.entities.Pedido;
+import com.renan.bartendersmart.services.PedidoService;
 
 @RestController
-@RequestMapping(value = "/produtos")
-public class ProdutoResource {
+@RequestMapping(value = "/pedidos")
+public class PedidoResource {
 	
 	@Autowired
-	private ProdutoService service;
+	private PedidoService service;
 
 	@GetMapping
-	public ResponseEntity<List<Produto>> findAll(){		
-		List<Produto> list = service.findAll();
+	public ResponseEntity<List<Pedido>> findAll(){		
+		List<Pedido> list = service.findAll();
 		
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Produto> findById(@PathVariable Long id){
-		Produto obj = service.findById(id);
+	public ResponseEntity<Pedido> findById(@PathVariable Long id){
+		Pedido obj = service.findById(id);
 		
 		return ResponseEntity.ok().body(obj);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<Produto> insert(@RequestBody Produto obj){
+	public ResponseEntity<Pedido> insert(@RequestBody Pedido obj){
 		obj = service.insert(obj);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -56,7 +56,7 @@ public class ProdutoResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Produto> update(@PathVariable Long id, @RequestBody Produto obj){
+	public ResponseEntity<Pedido> update(@PathVariable Long id, @RequestBody Pedido obj){
 		obj = service.update(id, obj);
 		
 		return ResponseEntity.ok().body(obj);		
