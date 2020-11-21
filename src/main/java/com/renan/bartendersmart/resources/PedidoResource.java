@@ -24,7 +24,8 @@ public class PedidoResource {
 	
 	@Autowired
 	private PedidoService service;
-
+	
+	@CrossOrigin
 	@GetMapping
 	public ResponseEntity<List<Pedido>> findAll(){		
 		List<Pedido> list = service.findAll();
@@ -32,13 +33,15 @@ public class PedidoResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@CrossOrigin
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Pedido> findById(@PathVariable Long id){
 		Pedido obj = service.findById(id);
 		
 		return ResponseEntity.ok().body(obj);
 	}
-
+	
+	@CrossOrigin
 	@PostMapping
 	public ResponseEntity<Pedido> insert(@RequestBody Pedido obj){
 		obj = service.insert(obj);
@@ -48,6 +51,7 @@ public class PedidoResource {
 		return ResponseEntity.created(uri).body(obj);
 	}
 	
+	@CrossOrigin
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id){
 		service.delete(id);
@@ -55,6 +59,7 @@ public class PedidoResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@CrossOrigin
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Pedido> update(@PathVariable Long id, @RequestBody Pedido obj){
 		obj = service.update(id, obj);
