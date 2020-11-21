@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.renan.bartendersmart.entities.pk.ItemPedidoPK;
 
 @Entity
-@Table(name = "tb_itemPedido")
+@Table(name = "tb_item_pedido")
 public class ItemPedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
