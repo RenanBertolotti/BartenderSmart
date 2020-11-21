@@ -5,10 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.CrossOrigin;
-=======
->>>>>>> eb9b36b2e95a5b57dbee7aa5560576f9173806f7
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,11 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-<<<<<<< HEAD
-
-=======
-import org.springframework.web.bind.annotation.CrossOrigin;
->>>>>>> eb9b36b2e95a5b57dbee7aa5560576f9173806f7
 import com.renan.bartendersmart.entities.Pedido;
 import com.renan.bartendersmart.services.PedidoService;
 
@@ -32,11 +24,7 @@ public class PedidoResource {
 	
 	@Autowired
 	private PedidoService service;
-<<<<<<< HEAD
-
-=======
 	
->>>>>>> eb9b36b2e95a5b57dbee7aa5560576f9173806f7
 	@CrossOrigin
 	@GetMapping
 	public ResponseEntity<List<Pedido>> findAll(){		
@@ -52,11 +40,7 @@ public class PedidoResource {
 		
 		return ResponseEntity.ok().body(obj);
 	}
-<<<<<<< HEAD
-
-=======
 	
->>>>>>> eb9b36b2e95a5b57dbee7aa5560576f9173806f7
 	@CrossOrigin
 	@PostMapping
 	public ResponseEntity<Pedido> insert(@RequestBody Pedido obj){
