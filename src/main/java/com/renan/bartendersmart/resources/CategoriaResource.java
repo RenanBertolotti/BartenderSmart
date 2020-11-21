@@ -24,7 +24,8 @@ public class CategoriaResource {
 	
 	@Autowired
 	private CategoriaService service;
-
+	
+	@CrossOrigin
 	@GetMapping
 	public ResponseEntity<List<Categoria>> findAll(){		
 		List<Categoria> list = service.findAll();
@@ -32,6 +33,7 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@CrossOrigin
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Categoria> findById(@PathVariable Long id){
 		Categoria obj = service.findById(id);
@@ -39,6 +41,7 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@CrossOrigin
 	@PostMapping
 	public ResponseEntity<Categoria> insert(@RequestBody Categoria obj){
 		obj = service.insert(obj);
@@ -48,6 +51,7 @@ public class CategoriaResource {
 		return ResponseEntity.created(uri).body(obj);
 	}
 	
+	@CrossOrigin
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id){
 		service.delete(id);
@@ -55,6 +59,7 @@ public class CategoriaResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@CrossOrigin
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Categoria> update(@PathVariable Long id, @RequestBody Categoria obj){
 		obj = service.update(id, obj);
