@@ -10,44 +10,43 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.renan.bartendersmart.entities.Pedido;
-import com.renan.bartendersmart.services.PedidoService;
+import com.renan.bartendersmart.entities.ItemPedido;
+import com.renan.bartendersmart.services.ItemPedidoService;
 
 @RestController
-@RequestMapping(value = "/pedidos")
-public class PedidoResource {
+@RequestMapping(value = "/itemPedidos")
+public class ItemPedidoResource {
 	
 	@Autowired
-	private PedidoService service;
+	private ItemPedidoService service;
 
 	@CrossOrigin
 	@GetMapping
-	public ResponseEntity<List<Pedido>> findAll(){		
-		List<Pedido> list = service.findAll();
+	public ResponseEntity<List<ItemPedido>> findAll(){		
+		List<ItemPedido> list = service.findAll();
 		
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@CrossOrigin
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Pedido> findById(@PathVariable Long id){
-		Pedido obj = service.findById(id);
+	public ResponseEntity<ItemPedido> findById(@PathVariable Long id){
+		ItemPedido obj = service.findById(id);
 		
 		return ResponseEntity.ok().body(obj);
 	}
-
+	
 	@CrossOrigin
 	@PostMapping
-	public ResponseEntity<Pedido> insert(@RequestBody Pedido obj){
+	public ResponseEntity<ItemPedido> insert(@RequestBody ItemPedido obj){
 		obj = service.insert(obj);
 		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getPedido()).toUri();
 		
 		return ResponseEntity.created(uri).body(obj);
 	}
@@ -59,13 +58,4 @@ public class PedidoResource {
 		
 		return ResponseEntity.noContent().build();
 	}
-	
-	@CrossOrigin
-	@PutMapping(value = "/{id}")
-	public ResponseEntity<Pedido> update(@PathVariable Long id, @RequestBody Pedido obj){
-		obj = service.update(id, obj);
-		
-		return ResponseEntity.ok().body(obj);		
-	}
 }
-
