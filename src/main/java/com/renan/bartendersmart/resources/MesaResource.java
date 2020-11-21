@@ -24,7 +24,8 @@ public class MesaResource {
 	
 	@Autowired
 	private MesaService service;
-
+	
+	@CrossOrigin
 	@GetMapping
 	public ResponseEntity<List<Mesa>> findAll(){		
 		List<Mesa> list = service.findAll();
@@ -32,6 +33,7 @@ public class MesaResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@CrossOrigin
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Mesa> findById(@PathVariable Long id){
 		Mesa obj = service.findById(id);
@@ -39,6 +41,7 @@ public class MesaResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@CrossOrigin
 	@PostMapping
 	public ResponseEntity<Mesa> insert(@RequestBody Mesa obj){
 		obj = service.insert(obj);
@@ -48,6 +51,7 @@ public class MesaResource {
 		return ResponseEntity.created(uri).body(obj);
 	}
 	
+	@CrossOrigin
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id){
 		service.delete(id);
@@ -55,6 +59,7 @@ public class MesaResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@CrossOrigin
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Mesa> update(@PathVariable Long id, @RequestBody Mesa obj){
 		obj = service.update(id, obj);
