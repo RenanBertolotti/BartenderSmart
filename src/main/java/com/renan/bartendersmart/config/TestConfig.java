@@ -69,9 +69,13 @@ public class TestConfig implements CommandLineRunner {
 		Mesa m1 = new Mesa(null, "Mesa1");
 		Mesa m2 = new Mesa(null, "Mesa2");
 		
-		Pedido p1 = new Pedido(null, Instant.parse("2020-06-20T19:53:07Z"),PedidoStatus.WAITING_PRODUCTION, m1);
-		Pedido p2 = new Pedido(null, Instant.parse("2020-07-21T03:42:10Z"),PedidoStatus.READY, m2);
-		Pedido p3 = new Pedido(null, Instant.parse("2020-07-22T15:21:22Z"),PedidoStatus.DELIVERED, m1); 
+		//Pedido p1 = new Pedido(null, Instant.parse("2020-06-20T19:53:07Z"),PedidoStatus.WAITING_PRODUCTION, m1);
+		//Pedido p2 = new Pedido(null, Instant.parse("2020-07-21T03:42:10Z"),PedidoStatus.READY, m2);
+		//Pedido p3 = new Pedido(null, Instant.parse("2020-07-22T15:21:22Z"),PedidoStatus.DELIVERED, m1); 
+		
+		Pedido p1 = new Pedido(null, Instant.parse("2020-06-20T19:53:07Z"), m1);
+		Pedido p2 = new Pedido(null, Instant.parse("2020-07-21T03:42:10Z"), m2);
+		Pedido p3 = new Pedido(null, Instant.parse("2020-07-22T15:21:22Z"), m1); 
 		
 		mesaRepository.saveAll(Arrays.asList(m1, m2));
 		pedidoRepository.saveAll(Arrays.asList(p1, p2, p3));

@@ -52,7 +52,7 @@ public class PedidoService {
 	private void updateData(Pedido entidade, Pedido pedido) {
 		entidade.setMesa(pedido.getMesa());		
 		entidade.setMoment(pedido.getMoment());	
-		entidade.setPedidoStatus(pedido.getPedidoStatus());
+		//entidade.setPedidoStatus(pedido.getPedidoStatus());
 	}
 	
 	public Pedido update(Long id, Pedido pedido) {

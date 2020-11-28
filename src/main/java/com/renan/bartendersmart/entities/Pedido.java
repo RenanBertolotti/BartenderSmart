@@ -32,7 +32,7 @@ public class Pedido implements Serializable{
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
 	private Instant moment;
 	
-	private Integer pedidoStatus;
+	//private Integer pedidoStatus;
 
 	@ManyToOne
 	@JoinColumn(name = "mesa_id")
@@ -48,11 +48,10 @@ public class Pedido implements Serializable{
 		
 	}
 
-	public Pedido(Long id, Instant moment,PedidoStatus pedidoStatus, Mesa mesa) {
+	public Pedido(Long id, Instant moment, Mesa mesa) {
 		super();
 		this.id = id;
 		this.moment = moment;
-		setPedidoStatus(pedidoStatus);
 		this.mesa = mesa;
 	}
 
@@ -72,15 +71,15 @@ public class Pedido implements Serializable{
 		this.moment = moment;
 	}	
 
-	public PedidoStatus getPedidoStatus() {
-		return PedidoStatus.valueOf(pedidoStatus);
-	}
+	//public PedidoStatus getPedidoStatus() {
+	//	return PedidoStatus.valueOf(pedidoStatus);
+	//}
 
-	public void setPedidoStatus(PedidoStatus pedidoStatus) {
-		if(pedidoStatus != null) {
-			this.pedidoStatus = pedidoStatus.getCode();
-		}		
-	}
+	//public void setPedidoStatus(PedidoStatus pedidoStatus) {
+	//	if(pedidoStatus != null) {
+	//		this.pedidoStatus = pedidoStatus.getCode();
+	//	}		
+	//}
 
 	public Mesa getMesa() {
 		return mesa;
