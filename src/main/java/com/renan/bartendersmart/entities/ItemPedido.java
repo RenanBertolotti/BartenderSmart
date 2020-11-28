@@ -2,20 +2,32 @@ package com.renan.bartendersmart.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.renan.bartendersmart.entities.pk.ItemPedidoPK;
 
 @Entity
 @Table(name = "tb_item_pedido")
 public class ItemPedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@EmbeddedId
-	private ItemPedidoPK id = new ItemPedidoPK();
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@ManyToOne
+	@JoinColumn(name = "pedido_id")
+	private Pedido pedido;
+	
+	@ManyToOne
+	@JoinColumn(name = "produto_id")
+	private Produto produto;
 	
 	private Integer quantity;
 	private Double price;
@@ -23,31 +35,40 @@ public class ItemPedido implements Serializable {
 	public ItemPedido() {
 		
 	}
-
-	public ItemPedido(Pedido pedido, Produto produto,Integer quantity, Double price) {
+	
+	public ItemPedido(Long id, Pedido pedido, Produto produto, Integer quantity, Double price) {
 		super();
-		id.setPedido(pedido);
-		id.setProduto(produto);
+		this.id = id;
+		this.pedido = pedido;
+		this.produto = produto;
 		this.quantity = quantity;
 		this.price = price;
+	}	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	@JsonIgnore
 	public Pedido getPedido() {
-		return id.getPedido();
+		return pedido;
 	}
-	
+
 	public void setPedido(Pedido pedido) {
-		id.setPedido(pedido);
+		this.pedido = pedido;
 	}
-	
+
 	public Produto getProduto() {
-		return id.getProduto();
+		return produto;
 	}
-	
+
 	public void setProduto(Produto produto) {
-		id.setProduto(produto);
-	}	
+		this.produto = produto;
+	}
 
 	public Integer getQuantity() {
 		return quantity;
@@ -64,7 +85,7 @@ public class ItemPedido implements Serializable {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-	
+
 	public Double getSubTotal(){
 		return price * quantity;
 	}

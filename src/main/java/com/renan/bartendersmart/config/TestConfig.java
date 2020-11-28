@@ -76,10 +76,10 @@ public class TestConfig implements CommandLineRunner {
 		mesaRepository.saveAll(Arrays.asList(m1, m2));
 		pedidoRepository.saveAll(Arrays.asList(p1, p2, p3));
 		
-		ItemPedido ip1 = new ItemPedido(p1, po1, 2, po1.getPrice());
-		ItemPedido ip2 = new ItemPedido(p1, po3, 1, po3.getPrice());
-		ItemPedido ip3 = new ItemPedido(p2, po3, 2, po3.getPrice());
-		ItemPedido ip4 = new ItemPedido(p3, po5, 2, po5.getPrice()); 
+		ItemPedido ip1 = new ItemPedido(null, p1, po1, 2, po1.getPrice());
+		ItemPedido ip2 = new ItemPedido(null, p1, po3, 1, po3.getPrice());
+		ItemPedido ip3 = new ItemPedido(null, p2, po3, 2, po3.getPrice());
+		ItemPedido ip4 = new ItemPedido(null, p3, po5, 2, po5.getPrice()); 
 		
 		itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2, ip3, ip4));
 		
