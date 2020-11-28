@@ -38,7 +38,7 @@ public class Pedido implements Serializable{
 	@JoinColumn(name = "mesa_id")
 	private Mesa mesa;
 	
-	@OneToMany(mappedBy = "id.pedido")
+	@OneToMany(mappedBy = "pedido")
 	private Set<ItemPedido> items = new HashSet<>();
 	
 	@OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
