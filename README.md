@@ -1,10 +1,10 @@
-#Nome do Projeto:
+# Nome do Projeto:
 Bartender Smart.
 
-##Tema:
+## Tema:
 Sistema para automação de uma lanchonete/bar.
 
-##Descrição do Projeto:
+## Descrição do Projeto:
 Sistema que visa agilizar e facilitar os processos de um estabelecimento, como, pedidos, cardápio, conta da mesa, cozinha, entre outros.
 O sistema terá quatro tipos de módulo,sendo eles, cliente, garçom, cozinha, caixa. Onde cada módulo terá uma interface diferente e características moldadas ao seu módulo, ex: o cliente só poderá consultar a sua mesa,consultar cardápio, solicitar pedido e finalizar conta, enquanto a cozinha, só conseguirá consultar pedidos a serem feitos e confirmar pedidos prontos.
 
@@ -32,8 +32,8 @@ O Spring Boot fornece a maioria dos componentes baseados no Spring necessários 
 O React é a biblioteca mais popular do JavaScript e é usada para construir uma interface de usuário (IU). Ela oferece uma resposta excelente para o usuário adicionar comandos usando um novo método de renderizar sites.
 
 
-##Como rodar o projeto
-###Java - api
+## Como rodar o projeto
+### Java - api
 Caso deseja testar o codigo desenvolvido na sua maquina você precisa seguir alguns passos:
 
 >Ter instalado e configurado o Java11
@@ -44,7 +44,7 @@ Caso deseja testar o codigo desenvolvido na sua maquina você precisa seguir alg
 
 >Importar o projeto na sua IDE escolhida, após isso, o MAVEN irá 
 
-###React - FrontEnd
+### React - FrontEnd
 link do Front-End do projeto: [AQUI]()
 
 >Ter instalado o NodeJs
