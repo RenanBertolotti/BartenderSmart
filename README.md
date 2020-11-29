@@ -15,7 +15,7 @@ Sistema para automação de uma lanchonete/bar.
 ##Descrição do Projeto:
 Sistema que visa agilizar e facilitar os processos de um estabelecimento, como, pedidos, cardápio, conta da mesa, cozinha, entre outros.
 O sistema terá quatro tipos de módulo,sendo eles, cliente, garçom, cozinha, caixa. Onde cada módulo terá uma interface diferente e características moldadas ao seu módulo, ex: o cliente só poderá consultar a sua mesa,consultar cardápio, solicitar pedido e finalizar conta, enquanto a cozinha, só conseguirá consultar pedidos a serem feitos e confirmar pedidos prontos.
-#----------------------------------------------------------------
+
 ## Java
 versão utilizada: 11
 
@@ -31,7 +31,6 @@ O Spring Boot fornece a maioria dos componentes baseados no Spring necessários 
 
 O React é a biblioteca mais popular do JavaScript e é usada para construir uma interface de usuário (IU). Ela oferece uma resposta excelente para o usuário adicionar comandos usando um novo método de renderizar sites.
 
-#----------------------------------------------------------------
 
 #Como rodar o projeto
 ###Java - api
