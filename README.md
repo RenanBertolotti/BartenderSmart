@@ -45,7 +45,7 @@ Caso deseja testar o codigo desenvolvido na sua maquina você precisa seguir alg
 >Importar o projeto na sua IDE escolhida, após isso, o MAVEN irá 
 
 ### React - FrontEnd
-link do Front-End do projeto: [AQUI]()
+link do Front-End do projeto: [AQUI](https://github.com/RenanBertolotti/BartenderSmartFront)
 
 >Ter instalado o NodeJs
 
